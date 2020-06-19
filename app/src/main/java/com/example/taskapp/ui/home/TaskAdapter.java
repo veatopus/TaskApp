@@ -1,7 +1,6 @@
-package com.example.taskapp.ui;
+package com.example.taskapp.ui.home;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,31 +8,30 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.R;
+import com.example.taskapp.models.TaskModel;
 
 import java.util.ArrayList;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    private ArrayList<Task> data;
+    private ArrayList<TaskModel> data;
     private boolean aBoolean = false;
 
-    public TaskAdapter(ArrayList<Task> data) {
+    TaskAdapter(ArrayList<TaskModel> data) {
         this.data = data;
     }
 
-    public void add(Task task) {
-        if (aBoolean) task.setColor(Color.WHITE);
-        else task.setColor(Color.BLUE);
+    void add(TaskModel taskModel) {
+        if (aBoolean) taskModel.setColor(Color.WHITE);
+        else taskModel.setColor(Color.BLUE);
         aBoolean = !aBoolean;
-        data.add(task);
+        data.add(taskModel);
         notifyDataSetChanged();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @NonNull
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,10 +62,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             constraintLayout = itemView.findViewById(R.id.constaintlayoutbg);
         }
 
-        void onBind(Task task) {
-            buttonTitle.setText(task.getTitle());
-            textViewDescription.setText(task.getDescription());
-            constraintLayout.setBackgroundColor(task.getColor());
+        void onBind(TaskModel taskModel) {
+            buttonTitle.setText(taskModel.getTitle());
+            textViewDescription.setText(taskModel.getDescription());
+            constraintLayout.setBackgroundColor(taskModel.getColor());
         }
     }
 }

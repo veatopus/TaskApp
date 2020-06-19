@@ -27,4 +27,9 @@
         android:name="com.example.taskapp.ui.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task" />
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.example.taskapp.ui.onboard.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" />
 </navigation>

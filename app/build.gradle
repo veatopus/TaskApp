@@ -23,6 +23,10 @@ android {
 
 }
 
+ext {
+    supportLibrary = "27.0.2"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -36,4 +40,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "com.android.support:design:${supportLibrary}"
 }

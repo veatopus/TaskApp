@@ -18,4 +18,7 @@
     <string name="enter_title">enter title:</string>
     <string name="enter_description">enter description:</string>
     <string name="example_btn_text">title</string>
+    <string name="menu_task">Tasks</string>
+    <string name="start">Start</string>
+    <string name="action_delite_settings">очистить настройки</string>
 </resources>

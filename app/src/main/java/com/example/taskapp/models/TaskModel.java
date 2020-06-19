@@ -1,15 +1,15 @@
-package com.example.taskapp.ui;
+package com.example.taskapp.models;
 
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class Task implements Serializable{
+public class TaskModel implements Serializable{
     private String title;
     private String description;
     private int color;
 
-    public Task(String title, String description) {
+    public TaskModel(String title, String description) {
         this.title = title;
         this.description = description;
     }
@@ -22,11 +22,11 @@ public class Task implements Serializable{
         this.color = color;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
