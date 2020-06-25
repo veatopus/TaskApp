@@ -26,9 +26,9 @@ public class PageAdapter extends PagerAdapter {
     }
 
     private BordModel[] bordModels = new BordModel[]{
-            new BordModel(R.drawable.image_onboard_1, "Создовай", "создовай собственные задачи")
+            new BordModel(R.drawable.image_onboard_1, "Создавай", "создовай собственные задачи")
             , new BordModel(R.drawable.image_onboard_2, "Совершенствуй", "завершай и изменяй свои задачи")
-            , new BordModel(R.drawable.image_onboard_3, "Уничтожай", "удаляй заметки. сбрасывай настройки")};
+            , new BordModel(R.drawable.image_onboard_3, "Уничтожай", "удаляй заметки. Сбрасывай настройки")};
 
     @NonNull
     @Override
@@ -54,14 +54,12 @@ public class PageAdapter extends PagerAdapter {
         ((TextView) view.findViewById(R.id.tv_title)).setText(bordModels[position].getTitle());
         ((TextView) view.findViewById(R.id.tv_description)).setText(bordModels[position].getDescription());
         ((ImageView) view.findViewById(R.id.imageView)).setImageResource(bordModels[position].getImage());
-        if (position < 2) {
-            view.findViewById(R.id.btn_start).setVisibility(View.GONE);
-            //view.findViewById(R.id.view).setVisibility(View.GONE);
-        } else {
-            view.findViewById(R.id.btn_start).setVisibility(View.VISIBLE);
-            //view.findViewById(R.id.view).setVisibility(View.VISIBLE);
-        }
+        if (position < 2) view.findViewById(R.id.btn_start).setVisibility(View.GONE);
+        else view.findViewById(R.id.btn_start).setVisibility(View.VISIBLE);
+
     }
+
+
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
@@ -70,7 +68,7 @@ public class PageAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return bordModels.length;
     }
 
     @Override

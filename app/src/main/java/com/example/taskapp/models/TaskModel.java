@@ -7,19 +7,10 @@ import java.io.Serializable;
 public class TaskModel implements Serializable{
     private String title;
     private String description;
-    private int color;
 
     public TaskModel(String title, String description) {
         this.title = title;
         this.description = description;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
     }
 
     public String getTitle() {

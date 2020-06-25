@@ -8,7 +8,7 @@
     tools:context=".ui.onboard.BoardFragment">
 
      <TextView
-         android:id="@+id/tv_start"
+         android:id="@+id/tv_skip"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:text="@string/start"
@@ -18,8 +18,9 @@
          android:layout_alignParentEnd="true"
          android:layout_margin="16dp"/>
 
+
     <androidx.viewpager.widget.ViewPager
-        android:layout_below="@id/tv_start"
+        android:layout_below="@id/tv_skip"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >

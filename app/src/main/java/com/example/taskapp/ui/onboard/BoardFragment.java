@@ -20,10 +20,10 @@ import com.example.taskapp.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class BoardFragment extends Fragment {
-    private TextView textViewStart;
     private PageAdapter pageAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private TextView textViewSkip;
 
 
     @Override
@@ -56,7 +56,25 @@ public class BoardFragment extends Fragment {
     }
 
     private void setOnClickListeners() {
-        textViewStart.setOnClickListener(new View.OnClickListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position>1) textViewSkip.setVisibility(View.GONE);
+                else textViewSkip.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        textViewSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Prefs(requireActivity()).isShown(true);
@@ -76,7 +94,7 @@ public class BoardFragment extends Fragment {
     }
 
     private void initialisation(View view) {
-        textViewStart = view.findViewById(R.id.tv_start);
+        textViewSkip = view.findViewById(R.id.tv_skip);
         pageAdapter = new PageAdapter();
         viewPager = view.findViewById(R.id.viewPager);
         pageAdapter = new PageAdapter();

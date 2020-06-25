@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
-    private FloatingActionButton fab;
+    //private FloatingActionButton fab;
     private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
     Toolbar toolbar;
@@ -41,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.nav_home) {
+                /*if (destination.getId() == R.id.nav_home) {
                     fab.show();
                 } else {
                     fab.hide();
-                }
+                }*/
                 if (destination.getId() == R.id.boardFragment) {
                     toolbar.setVisibility(View.GONE);
                 } else {
@@ -56,18 +55,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.addTaskFragment);
             }
-        });
+        });*/
     }
 
     private void initialisation() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = findViewById(R.id.fab);
+        //fab = findViewById(R.id.fab);
     }
 
     private void initNavController() {
