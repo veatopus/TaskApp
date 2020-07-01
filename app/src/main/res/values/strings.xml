@@ -21,4 +21,8 @@
     <string name="menu_task">Tasks</string>
     <string name="start">Skip</string>
     <string name="action_delite_settings">очистить настройки</string>
+    <string name="default_sort">сортировка по умолчанию</string>
+    <string name="sorting_alphabetically">сортировка по алфавиту</string>
+    <string name="delete_all_tasks">удалить все задачи</string>
+
 </resources>

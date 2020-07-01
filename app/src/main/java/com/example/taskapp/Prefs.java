@@ -22,6 +22,19 @@ public class Prefs {
         return sharedPreferences.getBoolean("isShown", false);
     }
 
+    public void isSortingAlphabetically(boolean value) {
+        sharedPreferences
+                .edit()
+                .putBoolean("isSortingAlphabetically", value)
+                .apply();
+    }
+
+    public boolean isSortingAlphabetically(){
+        return sharedPreferences.getBoolean("isSortingAlphabetically", false);
+    }
+
+
+
     void clear() {
         sharedPreferences.edit().clear().apply();
     }

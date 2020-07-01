@@ -6,4 +6,16 @@
         android:orderInCategory="100"
         android:title="@string/action_delite_settings"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/change_sort_type"
+        android:orderInCategory="100"
+        android:title="@string/sorting_alphabetically"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/deliteAll"
+        android:orderInCategory="100"
+        android:title="@string/delete_all_tasks"
+        app:showAsAction="never"/>
 </menu>

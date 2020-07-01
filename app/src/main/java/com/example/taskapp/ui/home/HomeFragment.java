@@ -3,29 +3,33 @@ package com.example.taskapp.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.taskapp.App;
 import com.example.taskapp.R;
 import com.example.taskapp.interfaces.OnItemClickListener;
 import com.example.taskapp.models.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class HomeFragment extends Fragment {
@@ -36,8 +40,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskAdapter taskAdapter;
     private DividerItemDecoration dividerItemDecoration;
-    private FragmentResultListener fragmentResultListener;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,15 +50,24 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialisation(view);
-        setOnClickListeners();
+        setClickListeners();
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(taskAdapter);
 
-        getParentFragmentManager().setFragmentResultListener("formRed",
-                getViewLifecycleOwner(), fragmentResultListener);
+        App.getInstance().getDatabase().taskDao().getAllLive().observe(getViewLifecycleOwner(), new Observer<List<TaskModel>>() {
+            @Override
+            public void onChanged(List<TaskModel> taskModels) {
+                arrayList.clear();
+                arrayList.addAll(taskModels);
+                taskAdapter.notifyDataSetChanged();
+            }
+        });
 
-        getParentFragmentManager().setFragmentResultListener("form",
-                getViewLifecycleOwner(), fragmentResultListener);
+        if (arrayList.isEmpty()) {
+            arrayList.addAll(App.getInstance().getDatabase().taskDao().getAll());
+            taskAdapter.notifyDataSetChanged();
+        }
+
     }
 
     private void initialisation(View view) {
@@ -65,51 +76,44 @@ public class HomeFragment extends Fragment {
         taskAdapter = new TaskAdapter(arrayList);
         dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), LinearLayout.VERTICAL);
         fab = view.findViewById(R.id.fab);
-        fragmentResultListener = new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                switch (requestKey){
-                    case"form":
-                        TaskModel task = (TaskModel) result.getSerializable("task");
-                        arrayList.add(0, task);
-                        break;
-                    case "formRed":
-                        Log.d("ololo", "onFragmentResult: ");
-                        int position = result.getInt("position");
-                        TaskModel taskModel = (TaskModel) result.getSerializable("task");
-                        arrayList.remove(position);
-                        arrayList.add(position, taskModel);
-                        break;
-                }
-                taskAdapter.notifyDataSetChanged();
-            }
-        };
     }
 
-    private void setOnClickListeners() {
+    private void setClickListeners() {
         taskAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("keyTask", arrayList.get(position));
-                bundle.putInt("keyPosition", position);
                 navController.navigate(R.id.addTaskFragment, bundle);
             }
+
             @Override
             public void onLongItemClick(final int position) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage("Вы точно хотите удалить задачу?")
                         .setPositiveButton("да", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                App.getInstance().getDatabase().taskDao().delete(arrayList.get(position));
                                 arrayList.remove(position);
-                                taskAdapter.notifyItemRemoved(position);
                             }
                         })
-                        .setNegativeButton("нет", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+                        .setNegativeButton("нет", null);
+                builder.show();
+            }
 
+            @Override
+            public void onColorViewClick(final int position) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Вы точно хотите оставить только те задачи которые имеют данный цвет?")
+                        .setPositiveButton("да", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                int color = arrayList.get(position).getColor();
+                                arrayList.clear();
+                                arrayList.addAll(App.getInstance().getDatabase().taskDao().getAllByColor(color));
+                                taskAdapter.notifyDataSetChanged();
                             }
-                        });
+                        })
+                        .setNegativeButton("нет", null);
                 builder.show();
             }
         });
@@ -119,5 +123,26 @@ public class HomeFragment extends Fragment {
                 navController.navigate(R.id.addTaskFragment);
             }
         });
+    }
+
+
+    public void sortList(boolean isDefaultSort) {
+        if (isDefaultSort) {
+            arrayList.clear();
+            arrayList.addAll(App.getInstance().getDatabase().taskDao().sort());
+            taskAdapter.notifyDataSetChanged();
+        } else {
+            arrayList.clear();
+            arrayList.addAll(App.getInstance().getDatabase().taskDao().getAll());
+            taskAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void removeAll() {
+        App.getInstance().getDatabase().taskDao().nukeTable();
+        for (int i = 0; i < arrayList.size()-1; i++) {
+            arrayList.remove(arrayList.get(i));
+            taskAdapter.notifyItemRemoved(i);
+        }
     }
 }
