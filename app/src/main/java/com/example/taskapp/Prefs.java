@@ -22,16 +22,51 @@ public class Prefs {
         return sharedPreferences.getBoolean("isShown", false);
     }
 
-    public void isSortingAlphabetically(boolean value) {
+    public void permissionGranted(boolean value) {
         sharedPreferences
                 .edit()
-                .putBoolean("isSortingAlphabetically", value)
+                .putBoolean("permissionGranted", value)
                 .apply();
     }
 
-    public boolean isSortingAlphabetically(){
-        return sharedPreferences.getBoolean("isSortingAlphabetically", false);
+    public boolean permissionGranted(){
+        return sharedPreferences.getBoolean("permissionGranted", false);
     }
+
+
+    public void name(String value) {
+        sharedPreferences
+                .edit()
+                .putString("name", value)
+                .apply();
+    }
+
+    public String name(){
+        return sharedPreferences.getString("name", "DefValue");
+    }
+
+    public void avatarUrl(String value) {
+        sharedPreferences
+                .edit()
+                .putString("avatarUrl", value)
+                .apply();
+    }
+
+    public String avatarUrl(){
+        return sharedPreferences.getString("avatarUrl", "");
+    }
+    public void desc(String value) {
+        sharedPreferences
+                .edit()
+                .putString("desc", value)
+                .apply();
+    }
+
+    public String desc(){
+        return sharedPreferences.getString("desc", "");
+    }
+
+
 
 
 

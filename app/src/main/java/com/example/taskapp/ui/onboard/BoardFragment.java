@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.taskapp.Prefs;
 import com.example.taskapp.R;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class BoardFragment extends Fragment {
     private PageAdapter pageAdapter;
@@ -29,6 +30,8 @@ public class BoardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         return inflater.inflate(R.layout.fragment_board, container, false);
     }
 
@@ -36,7 +39,7 @@ public class BoardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialisation(view);
-        setOnClickListeners();
+        setListeners();
         viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager, true);
         onBackPressedCallback();
@@ -55,7 +58,7 @@ public class BoardFragment extends Fragment {
                 .addCallback(getViewLifecycleOwner(), onBackPressedCallback);
     }
 
-    private void setOnClickListeners() {
+    private void setListeners() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -64,7 +67,7 @@ public class BoardFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                if (position>1) textViewSkip.setVisibility(View.GONE);
+                if (position > 1) textViewSkip.setVisibility(View.GONE);
                 else textViewSkip.setVisibility(View.VISIBLE);
             }
 
@@ -78,8 +81,12 @@ public class BoardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 new Prefs(requireActivity()).isShown(true);
+
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                navController.navigateUp();
+                if (FirebaseAuth.getInstance().getCurrentUser() == null)
+                    navController.navigate(R.id.action_boardFragment_to_phoneFragment);
+                else
+                    navController.popBackStack();
             }
         });
 
@@ -88,7 +95,10 @@ public class BoardFragment extends Fragment {
             public void onStart() {
                 new Prefs(requireActivity()).isShown(true);
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                navController.navigateUp();
+                if (FirebaseAuth.getInstance().getCurrentUser() == null)
+                    navController.navigate(R.id.action_boardFragment_to_phoneFragment);
+                else
+                    navController.popBackStack();
             }
         });
     }

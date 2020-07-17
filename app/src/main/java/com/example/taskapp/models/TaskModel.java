@@ -3,16 +3,19 @@ package com.example.taskapp.models;
 import android.graphics.Color;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 public class TaskModel implements Serializable, Comparable<TaskModel>{
 
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @PrimaryKey()
+    @NonNull
+    private String id;
     private int color = Color.WHITE;
     private String title;
     private String description;
@@ -22,6 +25,8 @@ public class TaskModel implements Serializable, Comparable<TaskModel>{
         this.description = description;
     }
 
+    public TaskModel() { }
+
     public int getColor() {
         return color;
     }
@@ -30,11 +35,11 @@ public class TaskModel implements Serializable, Comparable<TaskModel>{
         this.color = color;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:visibility="gone"/>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -17,52 +28,40 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="215dp"
-        android:background="@drawable/lprofile_list_img_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- <Button
-         android:id="@+id/btn_set_profile_icon"
-         android:layout_width="40dp"
-         android:layout_height="40dp"
-         android:layout_marginStart="50dp"
-         android:layout_marginTop="255dp"
-         android:background="@drawable/ic_camera"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintRight_toRightOf="parent"
-         app:layout_constraintTop_toTopOf="parent"/>-->
+    <Button
+        android:id="@+id/btn_set_profile_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@id/icon"
+        app:layout_constraintLeft_toLeftOf="@id/icon"
+        app:layout_constraintRight_toRightOf="@id/icon"
+        app:layout_constraintTop_toTopOf="@id/icon" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/user_name"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:drawableEnd="@drawable/ic_mode_edit_black"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/icon" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="@id/user_name" />
-
-    <TextView
+    <EditText
         android:id="@+id/user_desc"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:drawableEnd="@drawable/ic_mode_edit_black"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/user_name" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="@id/user_desc" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -73,6 +72,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_mode_edit" />
+        app:srcCompat="@drawable/ic_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

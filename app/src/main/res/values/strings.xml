@@ -24,5 +24,10 @@
     <string name="default_sort">сортировка по умолчанию</string>
     <string name="sorting_alphabetically">сортировка по алфавиту</string>
     <string name="delete_all_tasks">удалить все задачи</string>
+    <string name="btn_login_text">login</string>
+    <string name="btn_logout_text">logout</string>
+    <string name="logout_text">выйти из аккаунта</string>
+    <string name="menu_cloud">Cloud</string>
+    <string name="menu_note">Note</string>
 
 </resources>

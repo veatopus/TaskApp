@@ -1,12 +1,11 @@
 package com.example.taskapp;
 
-import android.app.Application;
-
+import androidx.multidex.MultiDexApplication;
 import androidx.room.Room;
 
 import com.example.taskapp.room.AppDatabase;
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     public static App instance;
     private AppDatabase database;

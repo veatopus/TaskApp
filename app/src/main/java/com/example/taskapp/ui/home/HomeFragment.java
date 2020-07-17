@@ -3,11 +3,11 @@ package com.example.taskapp.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,11 +21,14 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.taskapp.App;
+import com.example.taskapp.Prefs;
 import com.example.taskapp.R;
 import com.example.taskapp.interfaces.OnItemClickListener;
 import com.example.taskapp.models.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,12 +73,32 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void initProfileHeader(View view){
+        NavigationView navigationView = requireActivity().findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        Prefs prefs = new Prefs(requireActivity());
+
+        ImageView icon = header.findViewById(R.id.imageView);
+        TextView name = header.findViewById(R.id.name);
+        TextView desc = header.findViewById(R.id.desc);
+
+        Glide
+                .with(this)
+                .load(prefs.avatarUrl())
+                .circleCrop()
+                .into(icon);
+
+        name.setText(prefs.name());
+        desc.setText(prefs.desc());
+    }
+
     private void initialisation(View view) {
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         recyclerView = view.findViewById(R.id.container);
         taskAdapter = new TaskAdapter(arrayList);
         dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), LinearLayout.VERTICAL);
         fab = view.findViewById(R.id.fab);
+        initProfileHeader(view);
     }
 
     private void setClickListeners() {

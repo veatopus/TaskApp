@@ -9,32 +9,94 @@
         android:id="@+id/nav_home"
         android:name="com.example.taskapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_gallery"
+            app:destination="@id/nav_gallery" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+        <action
+            android:id="@+id/action_nav_home_to_profileFragment2"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.taskapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:label="Note"
+        tools:layout="@layout/fragment_gallery">
+        <action
+            android:id="@+id/action_nav_gallery_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.taskapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:label="облако"
+        tools:layout="@layout/fragment_slideshow">
+        <action
+            android:id="@+id/action_nav_slideshow_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+
+
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="com.example.taskapp.ui.AddTaskFragment"
-        android:label="fragment_add_task"
-        tools:layout="@layout/fragment_add_task" />
+        android:name="com.example.taskapp.ui.add_task.AddTaskFragment"
+        android:label="Добавляй и редактируй"
+        tools:layout="@layout/fragment_add_task">
+        <action
+            android:id="@+id/action_addTaskFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/boardFragment"
         android:name="com.example.taskapp.ui.onboard.BoardFragment"
-        android:label="fragment_board"
-        tools:layout="@layout/fragment_board" />
+        android:label="Добро пожаловать"
+        tools:layout="@layout/fragment_board">
+        <action
+            android:id="@+id/action_boardFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.taskapp.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Профиль"
         tools:layout="@layout/fragment_profile" />
+
+
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="com.example.taskapp.ui.auth.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone">
+        <action
+            android:id="@+id/action_phoneFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.taskapp.ui.profile.EditProfileFragment"
+        android:label="о себе" />
+    <fragment
+        android:id="@+id/showImageFragment"
+        android:name="com.example.taskapp.ui.media.ShowImageFragment"
+        android:label="fragment_show_image"
+        tools:layout="@layout/fragment_show_image" />
+
 </navigation>
