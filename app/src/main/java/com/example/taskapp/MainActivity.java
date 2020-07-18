@@ -35,6 +35,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
@@ -42,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     View header;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         initialisation();
         setOnClickListeners();
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             final Prefs prefs = new Prefs(this);
-            //if (prefs.avatarUrl().equals("")){return;}
             String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             FirebaseFirestore.getInstance().collection("users").document(uId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initProfileHeader(){
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 .into(icon);
 
         name.setText(prefs.name());
-        desc.setText(prefs.desc());
+        desc.setText(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber());
     }
 
 
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     toolbar.setVisibility(View.VISIBLE);
                 }
-                if (destination.getId() == R.id.profileFragment || destination.getId() == R.id.addTaskFragment) {
+                if (destination.getId() == R.id.profileFragment || destination.getId() == R.id.addTaskFragment || destination.getId() == R.id.nav_setting) {
                     DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
                     mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 } else {
@@ -123,6 +125,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.profileFragment);
+            }
+        });
+        navigationView.getMenu().findItem(R.id.nav_setting).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                navController.navigate(R.id.nav_setting);
+                return false;
             }
         });
     }

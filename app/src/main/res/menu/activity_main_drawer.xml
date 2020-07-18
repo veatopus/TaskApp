@@ -17,6 +17,11 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_cloud" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings_black"
+            android:title="@string/menu_settings" />
     </group>
 
 </menu>

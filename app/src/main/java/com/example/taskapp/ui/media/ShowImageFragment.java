@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class ShowImageFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        requireActivity().setTitle("htghbh");
     }
 
     @Override
@@ -40,6 +42,7 @@ public class ShowImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_show_image, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -60,24 +63,25 @@ public class ShowImageFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.show_image, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.show_image_download_to_gallery){
-            downloadToGallery("taskApp", address);
+        if (item.getItemId() == R.id.action_show_image_download_to_gallery){
+            downloadToGallery(address);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void downloadToGallery(String DIR_NAME, String downloadUrlOfImage){
+    private void downloadToGallery(String downloadUrlOfImage){
         String filename = "filename.jpg";
 
         File direct =
                 new File(Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                        .getAbsolutePath() + "/" + DIR_NAME + "/");
+                        .getAbsolutePath() + "/" + "taskApp" + "/");
 
 
         if (!direct.exists()) {
@@ -94,7 +98,7 @@ public class ShowImageFragment extends Fragment {
                 .setMimeType("image/jpeg")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES,
-                        File.separator + DIR_NAME + File.separator + filename);
+                        File.separator + "taskApp" + File.separator + filename);
 
         assert dm != null;
         dm.enqueue(request);

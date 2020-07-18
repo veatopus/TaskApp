@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+    android:label="@string/menu_settings"
     app:startDestination="@+id/nav_home">
 
     <fragment
@@ -48,7 +49,6 @@
             android:id="@+id/action_nav_slideshow_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
-
 
 
     <fragment
@@ -98,5 +98,16 @@
         android:name="com.example.taskapp.ui.media.ShowImageFragment"
         android:label="fragment_show_image"
         tools:layout="@layout/fragment_show_image" />
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="com.example.taskapp.ui.setting.SettingFragment"
+        tools:layout="@layout/fragment_setting"
+        android:label=" "/>
+
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.example.taskapp.ui.setting.EditFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_edit" />
 
 </navigation>

@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_show_image_download_to_gallery"
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save"
         android:orderInCategory="100"
-        android:title="@string/show_image_download_to_gallery"
-        app:showAsAction="never" />
+        android:title="@string/setting_menu_name"
+        app:showAsAction="always" />
 
 </menu>

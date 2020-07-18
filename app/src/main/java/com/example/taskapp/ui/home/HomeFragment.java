@@ -3,6 +3,7 @@ package com.example.taskapp.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
@@ -29,10 +31,11 @@ import com.example.taskapp.interfaces.OnItemClickListener;
 import com.example.taskapp.models.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
@@ -49,6 +52,7 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,6 +77,7 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initProfileHeader(View view){
         NavigationView navigationView = requireActivity().findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
@@ -89,9 +94,10 @@ public class HomeFragment extends Fragment {
                 .into(icon);
 
         name.setText(prefs.name());
-        desc.setText(prefs.desc());
+        desc.setText(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initialisation(View view) {
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         recyclerView = view.findViewById(R.id.container);
