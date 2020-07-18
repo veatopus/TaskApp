@@ -29,5 +29,6 @@
     <string name="logout_text">выйти из аккаунта</string>
     <string name="menu_cloud">Cloud</string>
     <string name="menu_note">Note</string>
+    <string name="show_image_download_to_gallery">скачать в галерею</string>
 
 </resources>

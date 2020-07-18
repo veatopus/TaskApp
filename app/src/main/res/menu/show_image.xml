@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/show_image_download_to_gallery"
+        android:orderInCategory="100"
+        android:title="@string/show_image_download_to_gallery"
+        app:showAsAction="never"/>
+
+</menu>

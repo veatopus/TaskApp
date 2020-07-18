@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         initialisation();
         setOnClickListeners();
@@ -167,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:

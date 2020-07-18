@@ -27,7 +27,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
-import com.example.taskapp.App;
 import com.example.taskapp.Prefs;
 import com.example.taskapp.R;
 import com.google.android.gms.tasks.Continuation;
